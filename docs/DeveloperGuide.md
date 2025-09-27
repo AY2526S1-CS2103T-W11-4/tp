@@ -288,30 +288,186 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TutorTrack` and the **Actor** is the `Tutor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a student contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a student with subject, name, contact, address, and lesson time
+2.  TutorTrack adds the student to the contact list and updates the UI to display the new student
+3.  TutorTrack shows confirmation message:
+    “New student added: John Doe (math-primary4, contact: 98230810, lesson: Tuesday 1400).”
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The student already exists (same name and contact).
 
-  Use case ends.
+    * 2a1. TutorTrack shows error message:
+      “Student with the same name and contact already exists.”
 
-* 3a. The given index is invalid.
+      Use case end
 
-    * 3a1. AddressBook shows an error message.
+* 2b. Any parameter is missing or invalid
+
+    * 2b1. TutorTrack shows specific error messages, e.g.:
+       * Missing subject → “Missing parameter: subject is required.” 
+       * Invalid subject → “Invalid subject format. Use <subject-level>, e.g., math-primary4.” 
+       * Missing name → “Missing parameter: name is required.” 
+       * Invalid name → “Name must not contain digits or special characters except hyphens.” 
+       * Duplicate parameter → “Duplicate parameter: <parameter-name> specified more than once.” 
+       * Missing contact → “Missing parameter: contact is required.”
+       * Invalid contact → “Contact must be an 8-digit number.” 
+       * Missing address → “Address cannot be empty.” 
+       * Missing/invalid daytime → “Day must be full name (e.g., Tuesday).” or “Time must be between 0000 and 2359.”
+
+      Use case ends.
+
+*{More to be added}*
+
+**Use case: delete a student contact**
+
+**MSS**
+
+1.  Tutor requests to list persons
+2.  TutorTrack shows a list of persons
+3.  Tutor requests to delete a specific person in the list
+4.  TutorTrack deletes the person
+5.  TutorTrack shows confirmation message:
+    “Deleted student: John Doe (math-primary4, contact: 98230810, lesson: Tuesday 1400).”
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+
+    * 2a1. TutorTrack shows error message:
+      “Can’t delete with empty list.”
+
+      Use case ends.
+
+* 2b. The given index is invalid
+
+    * 2b1. TutorTrack shows error message:
+      “The student index provided is invalid.”
 
       Use case resumes at step 2.
+* 2c. The list is empty
+
+    * 2c1. TutorTrack shows error message:
+      “Invalid command format. Usage: delete <index>.”
+
+      Use case ends.
+
+**Use case: find a student by name**
+
+**MSS**
+
+1.  Tutor requests to find students by entering a keyword
+2.  TutorTrack searches for matching students
+3.  Tutor requests to delete a specific person in the list
+4.  TutorTrack displays the list of matching students with details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Keyword is missing
+
+    * 2a1. TutorTrack shows error message:
+      “Keyword is missing!”
+
+      Use case ends.
+
+* 2b. Keyword contains invalid characters
+
+    * 2b1. TutorTrack shows error message:
+      “Do not enter invalid characters in!”
+
+      Use case ends.
+* 2c. No matching student is found
+
+    * 2c1. TutorTrack shows error message:
+      “Name is not Found!”
+
+      Use case ends.
+
+**Use case: filter students by subject**
+
+**MSS**
+
+1.  Tutor requests to filter students by subject-level
+2.  TutorTrack searches for students matching the subject-level
+3.  TutorTrack displays the list of matching students with details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Subject parameter is missing
+
+    * 2a1. TutorTrack shows error message:
+      “Subject is missing!”
+
+      Use case ends.
+
+* 2b. Subject format is invalid
+
+    * 2b1. TutorTrack shows error message:
+      * Missing hyphen → “Invalid subject format. Use <subject-level>, e.g., Math-Primary4.” 
+      * Non-alphanumeric level → “Subject level must only contain letters/numbers.”
+
+      Use case ends.
+* 2c. No matching student is found
+
+    * 2c1. TutorTrack shows error message:
+      “Name is not Found!”
+
+      Use case ends.
+
+**Use case: track payments**
+
+**MSS**
+
+1.  Tutor requests to list payments for a date range
+2.  TutorTrack retrieves payment records within the range
+3.  TutorTrack displays payments in a table with columns (Date, Student, Amount, Method, Note)
+4. TutorTrack shows summary of total payments:
+   “Listed X payments from yyyy-MM-dd to yyyy-MM-dd. Total: YYY.YY”
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No payments exist for the date range
+
+    * 2a1. TutorTrack shows error message:
+      “No payments found from yyyy-MM-dd to yyyy-MM-dd. Total: 0.00”
+
+      Use case ends.
+
+* 2b. Duplicate payment detected
+
+    * 2b1. TutorTrack asks whether to add duplicate payment
+
+      Use case resumes at step 1.
+
+* 2c. Invalid date format
+
+    * 2c1. TutorTrack shows error message:
+      * “Invalid date in from/: use dd-MM-yyyy, or dd/MM/yyyy.” 
+      * “Invalid date in to/: use dd-MM-yyyy, or dd/MM/yyyy.”
+
+      Use case ends.
+* 2d. Invalid range (from date after to date)
+
+    * 2d1. TutorTrack shows error message:
+      “Invalid range: from/ must be on or before to/.”
+
+      Use case ends.
 
 *{More to be added}*
 
