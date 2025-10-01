@@ -275,14 +275,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                                       | So that I can…​                                                |
+|----------|---------|--------------------------------------------------------------------|----------------------------------------------------------------|
+| `* * *`  | new tutor | quickly add my students' contact information | reach out to them or their parents without delay |
+| `* * *`  | tutor working with parents | keep parent contact info alongside student records | communicate updates conveniently |
+| `* * *`  | tutor | view all my students in one place | recall lesson history and contact details efficiently |
+| `* * *`  | tutor managing multiple subjects | filter students by subject | prepare lesson materials faster |
+| `* * *`  | tutor | record key points from each lesson | track student progress over time |
+| `* * *`  | tutor with many students | prioritize or tag important details | avoid forgetting critical information before lessons |
+| `* * *`  | tutor | search for a student by name | find their contact info or lesson history quickly |
+| `* * *`  | tutor | access past lesson notes easily | follow up on unfinished topics without repeating work |
+| `* * *`  | tutor | have a quick overview of today's schedule | prepare efficiently before lessons begin |
+| `* * *`  | tutor | Keep track of all made payments | Receive payments on time and ensure no tutee miss out payments |
+| `* * *`  | tutor | delete students contacts | remove students who are no longer under me |
+| `* * *`  | tutor | edit students contacts | keep their contacts up to date if they change it |
+| `* *`    | tutor | record attendance for each lesson | keep track of who missed sessions |
+| `* *`    | tutor | see upcoming lessons at a glance | plan my week and avoid scheduling conflicts |
+| `* *`    | tutor | Mark my students' work | Give students immediate feedback about their work |
+| `* *`    | tutor | keep track of my students exam dates | focus more on the specific topics closer to the date |
+| `* *`    | tutor | find out which students are weaker in which topics | focus my attention on those they need help with |
+| `* *`    | tutor | keep track of students exam scores | find out if they are improving and determine if lessons have been effective |
+| `* *`    | tutor | Filter each student by level | Find my students of the same level quicker |
+| `*`      | tutor | securely track students addresses | refer to their addresses and know where to travel to |
+| `*`      | tutor | review a student's work history | identify strengths and areas for improvement |
 
 *{More to be added}*
 
