@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import tutortrack.logic.commands.FindCommand;
 import tutortrack.model.person.NameContainsKeywordsPredicate;
+import tutortrack.model.person.TagContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -29,6 +30,23 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validTagArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")));
+        assertParseSuccess(parser, " t/friends colleagues", expectedFindCommand);
+
+        // single tag keyword
+        expectedFindCommand = new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends")));
+        assertParseSuccess(parser, " t/friends", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_emptyTagValue_throwsParseException() {
+        assertParseFailure(parser, " t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
 }

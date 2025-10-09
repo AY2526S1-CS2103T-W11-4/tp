@@ -155,6 +155,22 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find feature
+
+The find feature allows users to search for persons by name (default) or by tags (with `t/` prefix).
+
+#### Implementation
+
+The find mechanism is implemented using predicates:
+* `NameContainsKeywordsPredicate` - filters persons whose names match the keywords
+* `TagContainsKeywordsPredicate` - filters persons whose tags match the keywords
+
+The `FindCommandParser` detects the presence of the `t/` prefix using `ArgumentTokenizer`:
+* If `t/` prefix is present, it creates a `FindCommand` with `TagContainsKeywordsPredicate`
+* If `t/` prefix is absent, it creates a `FindCommand` with `NameContainsKeywordsPredicate` (default behavior)
+
+Both predicates implement `Predicate<Person>` and use case-insensitive full-word matching via `StringUtil.containsWordIgnoreCase()`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -379,7 +395,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: find a student by name**
+**Use case: find a student by name or tag**
 
 **MSS**
 
@@ -524,6 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Person**: A contact entity stored in the address book with fields such as name and phone.
 * **Tag**: A label attached to a person for categorisation or filtering.
+* **Predicate**: A functional interface that tests a condition on a `Person` object, used for filtering the person list.
 
 * **Parser**: Converts raw user input into specific `Command` objects.
 * **Command**: An object created by the parser that encapsulates a user action to be executed by `Logic`.
