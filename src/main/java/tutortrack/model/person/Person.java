@@ -70,10 +70,6 @@ public class Person {
         return nokContact;
     }
 
-    public Phone getPrimaryContact() {
-        return selfContact != null ? selfContact : nokContact;
-    }
-
     public SubjectLevel getSubjectLevel() {
         return subjectLevel;
     }

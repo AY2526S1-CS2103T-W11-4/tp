@@ -73,8 +73,8 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        selfContact = source.getSelfContact().value;
-        nokContact = source.getNokContact().value;
+        selfContact = (source.getSelfContact() != null) ? source.getSelfContact().value : null;
+        nokContact = (source.getNokContact() != null) ? source.getNokContact().value : null;
         subjectLevel = source.getSubjectLevel().value;
         dayTime = source.getDayTime().value;
         cost = source.getCost().value;
