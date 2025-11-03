@@ -156,12 +156,17 @@ public class Person {
         }
 
         // Consider persons the same if they share the same name (case-insensitive, trimmed)
+        // and the same self contact (NOK contact is ignored for duplication checks).
         String thisName = this.getName() == null ? null : this.getName().toString().trim();
         String otherName = otherPerson.getName() == null ? null : otherPerson.getName().toString().trim();
 
-        boolean sameName = thisName != null && otherName != null && thisName.equalsIgnoreCase(otherName);
+        Phone thisSelf = this.getSelfContact();
+        Phone otherSelf = otherPerson.getSelfContact();
 
-        return sameName;
+        boolean sameName = thisName != null && otherName != null && thisName.equalsIgnoreCase(otherName);
+        boolean sameSelfContact = thisSelf != null && otherSelf != null && thisSelf.equals(otherSelf);
+
+        return sameName && sameSelfContact;
     }
 
 
