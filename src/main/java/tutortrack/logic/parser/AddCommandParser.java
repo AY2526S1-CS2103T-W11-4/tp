@@ -63,7 +63,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (selfContact == null && nokContact == null) {
             throw new ParseException("At least one of self contact or NOK contact must be provided.");
         }
-
+        if (selfContact != null && selfContact.equals(nokContact)) {
+            throw new ParseException("Two contact numbers cannot be the same.");
+        }
         SubjectLevel subjectLevel = ParserUtil.parseSubjectLevel(argMultimap.getValue(PREFIX_SUBJECTLEVEL).get());
         DayTime dayTime = ParserUtil.parseDayTime(argMultimap.getValue(PREFIX_DAYTIME).get());
         Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());

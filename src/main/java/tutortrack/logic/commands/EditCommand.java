@@ -84,7 +84,12 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson;
+        try {
+            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -112,6 +117,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
+        if (updatedSelfContact != null && updatedSelfContact.equals(updatedNokContact)) {
+            throw new IllegalArgumentException("Two contact numbers cannot be the same.");
+        }
         Person editedPerson = new Person(updatedName, updatedSelfContact, updatedNokContact, updatedSubjectLevel,
                 updatedDayTime, updatedCost, updatedAddress, updatedTags);
 
