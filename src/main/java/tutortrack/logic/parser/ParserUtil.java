@@ -390,13 +390,32 @@ public class ParserUtil {
     /**
      * Converts escape sequences in the input string to their actual characters.
      * Supports: \n (newline), \t (tab), \\ (backslash)
+     * To type literal \n or \t, use \\n or \\t
      *
      * @param input The string that may contain escape sequences
      * @return The string with escape sequences converted to actual characters
      */
     private static String processEscapeSequences(String input) {
-        return input.replace("\\n", "\n")
-                .replace("\\t", "\t")
-                .replace("\\\\", "\\");
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '\\' && i + 1 < input.length()) {
+                char next = input.charAt(i + 1);
+                if (next == 'n') {
+                    result.append('\n');
+                    i++;
+                } else if (next == 't') {
+                    result.append('\t');
+                    i++;
+                } else if (next == '\\') {
+                    result.append('\\');
+                    i++;
+                } else {
+                    result.append('\\');
+                }
+            } else {
+                result.append(input.charAt(i));
+            }
+        }
+        return result.toString();
     }
 }
