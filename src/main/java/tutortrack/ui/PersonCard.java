@@ -56,8 +56,8 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
 
-        contact.setText(person.getSelfContact() != null ? person.getSelfContact().value : "");
-        nokContact.setText(person.getNokContact() != null ? person.getNokContact().value : "");
+        contact.setText(person.getSelfContact() != null ? person.getSelfContact().value : "-");
+        nokContact.setText(person.getNokContact() != null ? person.getNokContact().value : "-");
 
         address.setText(person.getAddress().value);
         subjectLevel.setText(person.getSubjectLevel().value);
